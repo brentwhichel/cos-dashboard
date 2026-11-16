@@ -1,0 +1,8 @@
+{
+ "version": 1,
+ "description": "Private feed of messages that meet my Chief of Staff constitution. Appended by my COS automations; read by my COS Communications Dashboard. Do not edit by hand.",
+ "items": [],
+ "runsDescription": "Every COS check (email screening, key Teams chat, Teams sweep) sets lastRun and appends one entry to recentRuns, even when nothing is added, so the dashboard always shows when it was last refreshed. recentRuns keeps the newest 200 entries.",
+ "recentRuns": [],
+ "lastRun": null
+}

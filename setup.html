@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Build your COS Communications Dashboard - setup guide</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23235e62'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" media="print" onload="this.media='all'" />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="stylesheet" href="assets/setup.css" />
+  </head>
+  <body>
+    <div class="app-root">
+      <a class="skip-link" href="#guide">Skip to the guide</a>
+      <header class="app-header">
+        <div class="app-header-inner">
+          <span class="app-logo" aria-hidden="true">
+            <svg class="lucide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+              <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+            </svg>
+          </span>
+          <span class="app-title"><a href="index.html">COS Communications</a> <span class="muted" style="font-weight: 400">&middot; Setup guide</span></span>
+          <div class="header-slot">
+            <a class="btn btn-default btn-sm" href="index.html">Open dashboard</a>
+          </div>
+        </div>
+      </header>
+
+      <main id="guide" class="page" tabindex="-1">
+        <div class="guide">
+          <!-- Intro -->
+          <section class="card hero" aria-labelledby="hero-title">
+            <p class="eyebrow">Cowork Chief of Staff</p>
+            <h1 id="hero-title">Build your own COS Communications Dashboard</h1>
+            <p class="lead">
+              One private page for every email and Teams chat that needs you. Cowork screens each message against your Chief of Staff constitution, researches the
+              answer, and drafts a reply in your voice. You review, edit and send it, mark it complete or delete it, and keep your own task list on the same page.
+              Nothing goes out until you press Send.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-default btn-md" href="#step-constitution">Start with Step 1</a>
+              <a class="btn btn-outline btn-md" href="index.html?demo">See the demo</a>
+              <a class="btn btn-outline btn-md" href="index.html">Open my dashboard</a>
+            </div>
+            <ul class="needs" aria-label="What you need">
+              <li>Microsoft 365 Copilot with Cowork, including automations (event triggers and scheduled tasks).</li>
+              <li>Your own Outlook, Teams and OneDrive. Everything stays in your Microsoft 365; this website stores nothing.</li>
+              <li>To view the dashboard: Microsoft Edge or Google Chrome with OneDrive synced to your computer, or a one-time app registration from IT for Microsoft 365 sign-in.</li>
+              <li>About 45 minutes for Steps 1 to 7. Plan a second session a week later for the audit and tuning.</li>
+            </ul>
+            <nav class="toc" aria-label="Steps">
+              <a href="#how">How it works</a>
+              <a href="#customize">Customize once</a>
+              <a href="#step-constitution">1. Constitution</a>
+              <a href="#step-feed">2. Private feed</a>
+              <a href="#step-dashboard">3. Dashboard</a>
+              <a href="#step-email">4. Email</a>
+              <a href="#step-customer">5. Customers</a>
+              <a href="#step-keychat">6. Key people</a>
+              <a href="#step-sweep">7. Teams sweep</a>
+              <a href="#step-audit">10. Audit</a>
+              <a href="#lessons">Lessons</a>
+            </nav>
+          </section>
+
+          <!-- How it works -->
+          <section class="card" id="how" aria-labelledby="how-title">
+            <p class="eyebrow">How it works</p>
+            <h2 class="section-title" id="how-title">Watch, store, act</h2>
+            <p class="section-desc">
+              Cowork automations watch your mail and Teams and write a private feed to your OneDrive. This dashboard reads that feed. You stay in control of every
+              reply and every commitment.
+            </p>
+            <div class="flow">
+              <div class="flow-col">
+                <h3>Watch <span>&middot; Cowork automations</span></h3>
+                <ul>
+                  <li>Inbox email screening</li>
+                  <li>Customer email screening</li>
+                  <li>Key-person chat alerts</li>
+                  <li>Scheduled Teams sweep</li>
+                </ul>
+              </div>
+              <div class="flow-col">
+                <h3>Store <span>&middot; private feed in OneDrive</span></h3>
+                <ul>
+                  <li>One item per message that needs you</li>
+                  <li>Priority and why it matters</li>
+                  <li>Researched draft, reply audience, sources</li>
+                  <li>Run log and Last refreshed</li>
+                </ul>
+              </div>
+              <div class="flow-col">
+                <h3>Act <span>&middot; this dashboard</span></h3>
+                <ul>
+                  <li>Review by day, newest first</li>
+                  <li>Edit the draft, then Send (with a 5-second undo)</li>
+                  <li>Mark complete, reopen or delete</li>
+                  <li>My tasks, on the same page</li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <!-- Customize -->
+          <section class="card" id="customize" aria-labelledby="customize-title">
+            <p class="eyebrow">Customize once</p>
+            <h2 class="section-title" id="customize-title">Your details</h2>
+            <p class="section-desc">Fill these in and every prompt below updates. Anything left blank stays as a [PLACEHOLDER] you can edit in Cowork.</p>
+            <form class="fields" id="fields" autocomplete="off"></form>
+            <p class="fields-note">Saved only in this browser. Nothing you type here is sent anywhere.</p>
+            <div class="fields-actions">
+              <button type="button" class="btn btn-outline btn-sm" id="clear-fields">Clear my details</button>
+            </div>
+          </section>
+
+          <div id="steps"></div>
+
+          <!-- Lessons -->
+          <section class="card" id="lessons" aria-labelledby="lessons-title">
+            <p class="eyebrow">Lessons from the live build</p>
+            <h2 class="section-title" id="lessons-title">Know these before you demo</h2>
+            <ul class="lessons">
+              <li><span class="badge tone-warning">!</span><span><strong>Editing pauses automations.</strong> After any change, re-activate the automation in Cowork Automations. The dashboard warns you when no check has landed for two business hours.</span></li>
+              <li><span class="badge tone-warning">!</span><span><strong>Some external replies need Outlook.</strong> Your organization may block apps from emailing people outside the company. If Send is blocked, the draft is unchanged: send that reply from Outlook.</span></li>
+              <li><span class="badge tone-warning">!</span><span><strong>Check the reply audience.</strong> A reply to a forwarded invite or an alert mailbox can go to the wrong person. When the summary says so, reply in the Teams chat instead.</span></li>
+              <li><span class="badge tone-warning">!</span><span><strong>Save files directly.</strong> A run that saves by downloading and re-uploading waits for an approval nobody sees. The instructions here always edit files in place.</span></li>
+              <li><span class="badge tone-warning">!</span><span><strong>Keep one feed.</strong> If OneDrive shows "conflicted" copies of comms-feed.json, ask Cowork to fold anything missing back into the main file, then delete the copies.</span></li>
+              <li><span class="badge tone-warning">!</span><span><strong>Watch your credits.</strong> Every run uses Copilot Credits, and most runs are email screenings that end in a skip. Outlook rules that keep marketing and newsletters out of your Inbox, or an hourly Teams sweep, cut runs the most. Type <code>/cost</code> in a Cowork task to see your usage.</span></li>
+            </ul>
+          </section>
+
+          <section class="card" aria-labelledby="where-title">
+            <p class="eyebrow">Where everything lives</p>
+            <h2 class="section-title" id="where-title">Your build at a glance</h2>
+            <div class="files">
+              <p><strong>Feed folder:</strong> <code>OneDrive &rsaquo; Documents &rsaquo; Cowork &rsaquo; <span data-token="FEED_FOLDER">COS Comms Dashboard</span></code></p>
+              <p><code>comms-feed.json</code> items and the run log, written only by your automations.</p>
+              <p><code>dashboard-state.json</code> what you sent, completed, deleted or edited, written only by the dashboard.</p>
+              <p><code>my-tasks.json</code> My tasks, written only by the dashboard.</p>
+              <p><code>teams-sweep.json</code> where the last Teams sweep ended.</p>
+              <p><strong>Automations:</strong> two email screenings, one alert per key person, and the scheduled Teams sweep.</p>
+            </div>
+          </section>
+
+          <section class="card" aria-labelledby="faq-title">
+            <p class="eyebrow">Troubleshooting</p>
+            <h2 class="section-title" id="faq-title">Common questions</h2>
+            <div class="lessons" style="display: grid; gap: 0.875rem">
+              <p><strong>The dashboard says "Couldn't find your feed".</strong> Step 2 hasn't run yet, or you picked the wrong folder. Pick <code>Documents &rsaquo; Cowork &rsaquo; COS Comms Dashboard</code> in your synced OneDrive.</p>
+              <p><strong>"No checks recorded since..."</strong> An automation is paused (often after an edit) or waiting for an approval. Open Cowork Automations, re-activate it, and approve any pending request.</p>
+              <p><strong>I don't see the OneDrive folder on my computer.</strong> Open OneDrive in the browser, go to Documents &rsaquo; Cowork, select the folder and choose Sync, or use Microsoft 365 sign-in instead.</p>
+              <p><strong>Can other people see my dashboard?</strong> No. The page has no server. It reads your own files in your browser, and the website owner never sees them.</p>
+            </div>
+          </section>
+
+          <p class="foot">
+            Built with Cowork. Every prompt is also in the <a href="prompts/" data-repo-path="prompts">prompts folder</a> as plain text, and the feed format is in
+            <a href="docs/feed-format.md" data-repo-path="docs/feed-format.md">docs/feed-format.md</a>.
+          </p>
+        </div>
+      </main>
+    </div>
+    <div class="toaster" id="toaster" aria-live="polite"></div>
+    <script src="assets/prompts.js"></script>
+    <script src="assets/setup.js"></script>
+  </body>
+</html>

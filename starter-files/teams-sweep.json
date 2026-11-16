@@ -1,0 +1,5 @@
+{
+ "version": 1,
+ "description": "Sweep marker for the COS Comms Dashboard Teams sweep. Only lastSweepAt is updated by each sweep run.",
+ "lastSweepAt": "2026-01-01T08:00:00-05:00"
+}
