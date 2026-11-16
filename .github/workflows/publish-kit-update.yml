@@ -1,0 +1,83 @@
+# Lets the repository owner publish kit updates from Cowork. Cowork opens issues titled
+# "Kit upload part N of M [checksum]"; once every part has arrived, this unpacks the kit,
+# commits it and closes the issues. Safe to delete in your own copy.
+name: Publish kit update
+
+on:
+  issues:
+    types: [opened]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pages: write
+
+concurrency:
+  group: publish-kit-update
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      github.actor == github.repository_owner &&
+      (github.event_name == 'workflow_dispatch' ||
+       startsWith(github.event.issue.title, 'Kit upload part '))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unpack the kit once every part has arrived
+        shell: python
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          import base64, hashlib, io, json, os, re, subprocess, tarfile
+          repo = os.environ["GITHUB_REPOSITORY"]
+          def sh(*cmd):
+              return subprocess.run(cmd, check=True, stdout=subprocess.PIPE, text=True).stdout.strip()
+          issues = json.loads(sh("gh", "api", f"repos/{repo}/issues?state=open&creator={repo.split('/')[0]}&per_page=100"))
+          sets = {}
+          for i in issues:
+              m = re.fullmatch(r"Kit upload part (\d+) of (\d+) \[([0-9a-f]{16})\]", i["title"])
+              if m:
+                  sets.setdefault((m[3], int(m[2])), {})[int(m[1])] = i
+          ready = [(k, v) for k, v in sets.items() if len(v) == k[1]]
+          if not ready:
+              print("Waiting for more parts:", {k[0]: sorted(v) for k, v in sets.items()})
+              raise SystemExit(0)
+          (tag, total), parts = ready[0]
+          text = "".join((parts[n]["body"] or "").split("kit-payload-v1")[-1].split("kit-end")[0] for n in range(1, total + 1))
+          data = base64.b64decode(re.sub(r"[^A-Za-z0-9+/=]", "", text))
+          if hashlib.sha256(data).hexdigest()[:16] != tag:
+              raise SystemExit("Checksum mismatch; nothing was changed")
+          count = 0
+          with tarfile.open(fileobj=io.BytesIO(data), mode="r:xz") as tar:
+              for f in tar.getmembers():
+                  if f.isdir():
+                      continue
+                  if not f.isfile() or f.name.startswith(("/", ".git/", ".github/")) or ".." in f.name.split("/"):
+                      raise SystemExit("Refusing to write " + f.name)
+                  body = tar.extractfile(f).read()
+                  if f.name == ".kit-remove":
+                      for p in body.decode().split():
+                          if os.path.exists(p) and not p.startswith(".github/"):
+                              sh("git", "rm", "-q", "--", p)
+                      continue
+                  os.makedirs(os.path.dirname(f.name) or ".", exist_ok=True)
+                  with open(f.name, "wb") as out:
+                      out.write(body)
+                  count += 1
+          sh("git", "config", "user.name", "github-actions[bot]")
+          sh("git", "config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com")
+          sh("git", "add", "-A")
+          if subprocess.run(["git", "diff", "--cached", "--quiet"]).returncode:
+              sh("git", "commit", "-q", "-m", f"Publish kit update {tag}")
+              sh("git", "push", "-q")
+              # Ask GitHub Pages to rebuild now (ignored if Pages is not turned on yet).
+              subprocess.run(["gh", "api", "-X", "POST", f"repos/{repo}/pages/builds"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+          sha = sh("git", "rev-parse", "--short", "HEAD")
+          for n in range(1, total + 1):
+              num = str(parts[n]["number"])
+              sh("gh", "issue", "edit", num, "--repo", repo, "--body", f"Part {n} of {total} published: {count} files in commit {sha}.")
+              sh("gh", "issue", "close", num, "--repo", repo)
+          print(f"Published {count} files in commit {sha}")
